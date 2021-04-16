@@ -24,9 +24,7 @@ export const fetchData = () => {
     axios
       .get("http://localhost:3333/smurfs")
       .then((res) => dispatch(actionCreator(FETCH_SMURF_SUCCESS, res.data)))
-      .catch((err) =>
-        console.log("seems get errors are impossible, how 'bout that?")
-      )
+      .catch((err) => dispatch(actionCreator(FETCH_SMURF_FAILURE, err.error)))
       .finally(() => dispatch(actionCreator(FETCH_SMURF_COMPLETE)));
   };
 };

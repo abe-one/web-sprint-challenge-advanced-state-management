@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchData } from "../actions";
 
 import Smurf from "./Smurf";
 
-const SmurfList = ({ smurfs, isLoading, error, fetchData }) => {
+const SmurfList = ({ smurfs, isLoading }) => {
   const testSmurf = {
     id: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
     name: "Poppa Smurf",
@@ -23,13 +22,6 @@ const SmurfList = ({ smurfs, isLoading, error, fetchData }) => {
       {smurfs.map((smurf) => (
         <Smurf smurf={smurf} />
       ))}
-      <button
-        onClick={() => {
-          fetchData();
-        }}
-      >
-        euo
-      </button>
     </div>
   );
 }; //SmurfList
@@ -38,11 +30,10 @@ const mapStateToProps = (state) => {
   return {
     smurfs: state.smurfs,
     isLoading: state.isLoading,
-    error: state.error,
   };
 };
 
-export default connect(mapStateToProps, { fetchData })(SmurfList);
+export default connect(mapStateToProps, {})(SmurfList);
 
 //Completed Task List:
 //1. Connect the smurfs and loading state values to the SmurfList component.
