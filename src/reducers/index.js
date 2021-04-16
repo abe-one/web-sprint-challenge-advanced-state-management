@@ -9,7 +9,10 @@ import {
 export const initialState = {
   smurfs: [],
   isLoading: false,
-  error: "",
+  error: {
+    fetch: "",
+    post: "",
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,14 +32,14 @@ const reducer = (state = initialState, action) => {
     case FETCH_SMURF_FAILURE:
       return {
         ...state,
-        smurfs: action.payload,
+        error: { ...state.error, fetch: action.payload },
       };
 
     case FETCH_SMURF_COMPLETE:
       return {
         ...state,
         isLoading: false,
-        error: "",
+        error: { ...state.error, fetch: "" },
       };
 
     default:
