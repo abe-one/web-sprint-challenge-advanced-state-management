@@ -1,4 +1,9 @@
-import { FETCH_SMURF_START } from "../actions";
+import { act } from "react-dom/test-utils";
+import {
+  FETCH_SMURF_COMPLETE,
+  FETCH_SMURF_START,
+  FETCH_SMURF_SUCCESS,
+} from "../actions";
 
 export const initialState = {
   smurfs: [],
@@ -12,6 +17,19 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+      };
+
+    case FETCH_SMURF_SUCCESS:
+      return {
+        ...state,
+        smurfs: action.payload,
+      };
+
+    case FETCH_SMURF_COMPLETE:
+      return {
+        ...state,
+        isLoading: false,
+        error: "",
       };
 
     default:

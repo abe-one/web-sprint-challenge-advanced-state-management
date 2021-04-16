@@ -10,10 +10,23 @@ export const FETCH_SMURF_COMPLETE = "FETCH_SMURF_COMPLETE";
 //2. Add a standard action that allows us to add new smurf (including the name, nickname, position, summary)
 //3. Add a standard action that allows us to set the value of the error message slice of state.
 
+const actionCreator = (type, payload) => {
+  return {
+    type: type,
+    payload: payload,
+  };
+};
+
 export const fetchData = () => {
   return (dispatch) => {
-    dispatch({
-      type: FETCH_SMURF_START,
-    });
+    dispatch(actionCreator(FETCH_SMURF_START));
+
+    axios
+      .get("http://localhost:3333/smurfs")
+      .then((res) => dispatch(actionCreator(FETCH_SMURF_SUCCESS, res.data)))
+      .catch((err) =>
+        console.log("seems get errors are impossible, how 'bout that?")
+      )
+      .finally(() => dispatch(actionCreator(FETCH_SMURF_COMPLETE)));
   };
 };
