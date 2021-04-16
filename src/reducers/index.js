@@ -1,5 +1,6 @@
 import { act } from "react-dom/test-utils";
 import {
+  ADD_SMURF,
   FETCH_SMURF_COMPLETE,
   FETCH_SMURF_FAILURE,
   FETCH_SMURF_START,
@@ -40,6 +41,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: { ...state.error, fetch: "" },
+      };
+
+    case ADD_SMURF:
+      return {
+        ...state,
+        smurfs: [...state.smurfs, action.payload],
       };
 
     default:
